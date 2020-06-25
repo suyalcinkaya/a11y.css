@@ -1,0 +1,69 @@
+:root {
+  --error: red;
+  --warning: orange;
+}
+
+:is(ul, ol) > *:not(li) {
+  outline: 2px dotted var(--error);
+}
+
+img:not([alt]),
+img[alt=''] {
+  outline: 2px dotted var(--error);
+}
+
+details > summary:not(:first-child),
+details > *:first-child:not(summary) {
+  outline: 2px dotted var(--error);
+}
+
+:is(b, i, q, em, attr, cite, code, span, small, label, strong) > div {
+  outline: 2px dotted var(--error);
+}
+
+/* Select should have only option or optgroup */
+select > *:is:not(option, optgroup) {
+  outline: 2px dotted var(--error);
+}
+
+/* forbidden nesting */
+:not(figure) > figcaption,
+:not(fieldset) > legend,
+:not(dl) > :is(dt, dd),
+:not(tr) > :is(td, th),
+:not(select) > :is(option, optgroup),
+:not(table) > :is(thead, tfoot, tbody, tr, colgroup, caption) {
+  outline: 2px dotted var(--error);
+}
+
+button:not([type]) {
+  outline: 2px dotted var(--error);
+}
+
+label:not([for]) {
+  outline: 2px dotted var(--error);
+}
+
+/* finding <img>'s missing height and width attributes */
+img:not([height]):not([width]),
+img[width=''],
+img[height=''] {
+  outline: 2px dotted var(--error);
+  filter: blur(20px);
+}
+
+/* elements with a tabindex other than 0 or -1 */
+[tabindex]:not([tabindex='0']),
+[tabindex='-1'] {
+  outline: 2px dotted var(--error);
+}
+
+/**
+ * This selector hunts for links that have:
+ * - no href
+ * - an empty href
+ * - a "#" href
+ */
+a:is(:not([href]), [href=''], [href='#']) {
+  outline: 2px dotted var(--error);
+}
